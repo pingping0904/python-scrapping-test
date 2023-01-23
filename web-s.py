@@ -13,11 +13,22 @@
 # prices = []
 # category = []
 import requests
-import io
+from bs4 import BeautifulSoup
 
-res = requests.get('https://codedamn-classrooms.github.io/webscraper-python-codedamn-classroom-website/')
+# Make a request
 
+page = requests.get("https://codedamn-classrooms.github.io/webscraper-python-codedamn-classroom-website/")
+soup = BeautifulSoup(page.content, 'html.parser')
 
-with io.open('mydata.html', 'w', encoding="utf-8") as f:
-    f.write(res.text)
-print(res.text, res.status_code)
+# Extract title of page
+page_title = soup.title
+
+# Extract body of page
+page_body = soup.body
+
+# Extract head of page
+page_head = soup.head
+
+# print the result
+print(page_title, page_head)
+
